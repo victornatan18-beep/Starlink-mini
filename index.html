@@ -27,6 +27,35 @@
 	</script>
 
 	<style>
+		/* ── CORREÇÃO: IMAGENS RESPONSIVAS MOBILE ── */
+		.benefit-item img,
+		.benefit-item {
+			width: 100%;
+			max-width: 100%;
+			display: block;
+		}
+		.benefit-grid {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			width: 100%;
+			padding: 0 16px;
+			box-sizing: border-box;
+		}
+		.benefit-item {
+			width: 100%;
+			border-radius: 10px;
+			overflow: hidden;
+		}
+		.benefit-item img {
+			width: 100%;
+			height: auto;
+			object-fit: cover;
+			display: block;
+			border-radius: 10px;
+		}
+
+		/* ── BANNER DE ELEGIBILIDADE ── */
 		.eligibility-banner {
 			background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
 			border: 1px solid rgba(255,255,255,0.12);
@@ -62,6 +91,8 @@
 			line-height: 1.45;
 			margin: 0 !important;
 		}
+
+		/* ── ALERTA DE ESTOQUE URGENTE ── */
 		.stock-alert {
 			background: rgba(255,50,50,0.07);
 			border: 1px solid rgba(255,50,50,0.2);
@@ -92,6 +123,8 @@
 			font-weight: 500;
 		}
 		.stock-alert strong { color: #ffaaaa; }
+
+		/* ── CÓMO FUNCIONA ── */
 		.how-section {
 			background: #0d0d0d;
 			border-top: 1px solid rgba(255,255,255,0.06);
@@ -150,6 +183,8 @@
 			font-size: 0.9rem;
 			margin-top: 2px;
 		}
+
+		/* ── CONTADOR ── */
 		.countdown {
 			display: flex;
 			gap: 16px;
@@ -182,6 +217,8 @@
 			align-self: center;
 			margin-bottom: 14px;
 		}
+
+		/* ── PROOF SOCIAL ── */
 		.proof-bar {
 			background: rgba(255,255,255,0.03);
 			border: 1px solid rgba(255,255,255,0.07);
@@ -208,6 +245,8 @@
 			margin-left: -6px;
 		}
 		.proof-avatars span:first-child { margin-left: 0; }
+
+		/* ── GARANTIA ── */
 		.guarantee-box {
 			background: rgba(255,255,255,0.02);
 			border: 1px solid rgba(255,255,255,0.08);
@@ -223,6 +262,8 @@
 		.guarantee-icon { font-size: 1.4rem; line-height: 1; }
 		.guarantee-box strong { display: block; font-size: 0.8rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
 		.guarantee-box p { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin: 0 !important; line-height: 1.5; }
+
+		/* ── SOBREESCRIBIR ESTILOS ORIGINALES ── */
 		.price-section .discount-badge {
 			background: #fff;
 			color: #000;
@@ -240,6 +281,9 @@
 
 	<img src="images/LPinbugqMeKS.png" alt="Starlink Mini" class="logo" width="272" height="auto">
 
+	<!-- ══════════════════════════════════════════
+	     HEADER — Gancho de elegibilidade
+	══════════════════════════════════════════ -->
 	<header class="header">
 		<h1>¡FUISTE SELECCIONADO/A!</h1>
 		<h2>TU CUPO PARA<br>2 AÑOS DE INTERNET<br>GRATIS ESTÁ RESERVADO</h2>
@@ -250,6 +294,7 @@
 		<a href="#valor" class="cta-button">ACTIVAR MIS 2 AÑOS GRATIS →</a>
 	</header>
 
+	<!-- Banner de elegibilidade confirmada -->
 	<div class="eligibility-banner">
 		<div class="eligibility-icon">✓</div>
 		<div class="eligibility-text">
@@ -258,11 +303,15 @@
 		</div>
 	</div>
 
+	<!-- Alerta de estoque -->
 	<div class="stock-alert">
 		<span class="stock-alert-dot"></span>
 		<p>⚠️ <strong>Quedan muy pocas unidades disponibles.</strong> Los cupos se están asignando en este momento — si cerrás esta página, tu lugar puede ser tomado por otro solicitante.</p>
 	</div>
 
+	<!-- ══════════════════════════════════════════
+	     CÓMO FUNCIONA — 3 pasos simples
+	══════════════════════════════════════════ -->
 	<section class="how-section">
 		<h2>¿CÓMO FUNCIONA TU PLAN GRATUITO?</h2>
 		<div class="steps-grid">
@@ -293,21 +342,30 @@
 		</div>
 	</section>
 
+	<!-- ══════════════════════════════════════════
+	     BENEFITS — IMAGENS CORRIGIDAS
+	══════════════════════════════════════════ -->
 	<section class="benefits">
 		<div class="benefit-grid">
 			<div class="benefit-item">
-				<img src="images/3OP2w000xvZQ.Webp" alt="Alta velocidad" loading="lazy" width="250" height="auto">
+				<!-- CORRIGIDO: extensão .webp em minúsculas -->
+				<img src="images/3OP2w000xvZQ.webp" alt="Alta velocidad" loading="lazy" width="100%" height="auto">
 			</div>
 			<div class="benefit-item">
-				<img src="images/xe0bqnJe2arO.Webp" alt="Sin mensualidad" loading="lazy" width="250" height="auto">
+				<!-- CORRIGIDO: era .Webp agora .webp -->
+				<img src="images/xe0bqnJe2arO.webp" alt="Sin mensualidad" loading="lazy" width="100%" height="auto">
 			</div>
 			<div class="benefit-item">
-				<img src="images/vME2WiL8IfUC.Webp" alt="Instalación simple" loading="lazy" width="250" height="auto">
+				<!-- CORRIGIDO: era .Webp agora .webp -->
+				<img src="images/vME2WiL8IfUC.webp" alt="Instalación simple" loading="lazy" width="100%" height="auto">
 			</div>
 		</div>
 		<h2>INTERNET SATELITAL DE ALTA VELOCIDAD — SIN PAGAR MENSUALIDAD POR 2 AÑOS</h2>
 	</section>
 
+	<!-- ══════════════════════════════════════════
+	     CONNECTIVITY — gancho de dor
+	══════════════════════════════════════════ -->
 	<section class="conectivity">
 		<div class="conectivity-content">
 			<h2>INTERNET DONDE<br>OTROS NO LLEGAN</h2>
@@ -324,6 +382,9 @@
 		</div>
 	</section>
 
+	<!-- ══════════════════════════════════════════
+	     TRIAL — reescrito como garantia
+	══════════════════════════════════════════ -->
 	<section class="trial">
 		<div class="trial-content">
 			<h2>COMPRÁ SIN RIESGO:<br><span class="highlight">30 DÍAS DE GARANTÍA TOTAL</span></h2>
@@ -336,6 +397,9 @@
 		</div>
 	</section>
 
+	<!-- ══════════════════════════════════════════
+	     SPACEX — credibilidade
+	══════════════════════════════════════════ -->
 	<section class="spacex-section">
 		<div class="spacex-content">
 			<h2>TECNOLOGÍA DESARROLLADA POR SPACEX</h2>
@@ -347,26 +411,20 @@
 	</section>
 
 	<!-- ══════════════════════════════════════════
-	     OFERTA EXCLUSIVA — contador
+	     OFERTA EXCLUSIVA — CONTADOR CORRIGIDO 15 MIN
 	══════════════════════════════════════════ -->
 	<section class="exclusive-offer">
 		<div class="offer-content">
 			<h2>⚠️ TU RESERVA VENCE EN:</h2>
 
-			<!-- HTML DO COUNTDOWN — não remover -->
 			<div class="countdown">
 				<div class="countdown-item">
-					<span id="hours">00</span>
-					<span class="label">Horas</span>
-				</div>
-				<span class="countdown-sep">:</span>
-				<div class="countdown-item">
-					<span id="minutes">15</span>
+					<span id="cd-minutes">15</span>
 					<span class="label">Minutos</span>
 				</div>
 				<span class="countdown-sep">:</span>
 				<div class="countdown-item">
-					<span id="seconds">00</span>
+					<span id="cd-seconds">00</span>
 					<span class="label">Segundos</span>
 				</div>
 			</div>
@@ -376,6 +434,7 @@
 				Esta es la <strong>única oportunidad</strong> de activar 2 años de internet satelital sin mensualidad con el hardware de SpaceX.
 			</p>
 
+			<!-- Proof social -->
 			<div class="proof-bar">
 				<div class="proof-avatars">
 					<span>MG</span><span>JR</span><span>AL</span><span>+</span>
@@ -385,6 +444,9 @@
 		</div>
 	</section>
 
+	<!-- ══════════════════════════════════════════
+	     PRICE — CTA principal
+	══════════════════════════════════════════ -->
 	<section id="valor" class="price-section">
 		<div class="price-content">
 			<img src="images/nah0YLRCnSDc.png" alt="Antena Starlink Mini" class="price-image" loading="lazy">
@@ -400,6 +462,7 @@
 				<p class="final-price">Hoy: $44.999 ARS</p>
 			</div>
 
+			<!-- Alerta de urgência embaixo do preço -->
 			<div class="stock-alert" style="margin-top:24px; margin-bottom:16px;">
 				<span class="stock-alert-dot"></span>
 				<p>Solo quedan <strong>pocas unidades</strong> disponibles para perfiles verificados. No garantizamos stock después de hoy.</p>
@@ -414,6 +477,7 @@
 				Más del 90% de las unidades para perfiles seleccionados ya fue reclamado.
 			</p>
 
+			<!-- Garantia -->
 			<div class="guarantee-box">
 				<span class="guarantee-icon">🛡️</span>
 				<div>
@@ -426,6 +490,9 @@
 		</div>
 	</section>
 
+	<!-- ══════════════════════════════════════════
+	     INCLUDED — lo que recibís
+	══════════════════════════════════════════ -->
 	<section class="included-section">
 		<div class="included-content">
 			<h2>Todo lo que recibís para activar tus 2 años:</h2>
@@ -440,6 +507,9 @@
 		</div>
 	</section>
 
+	<!-- ══════════════════════════════════════════
+	     FAQ — reescrito para o contexto do programa
+	══════════════════════════════════════════ -->
 	<section class="faq">
 		<h2>Preguntas frecuentes</h2>
 
@@ -453,6 +523,7 @@
 					<p>El <strong>servicio de internet es 100% gratuito por 2 años</strong> — no pagás ninguna mensualidad durante ese período. Lo único que adquirís es el hardware físico (la antena), que es necesario para recibir la señal satelital. Es igual que tener un TV de aire: el canal no te cobra, pero necesitás el televisor para verlo.</p>
 				</div>
 			</div>
+
 			<div class="accordion-item">
 				<div class="accordion-header">
 					<span class="plus-icon">+</span>
@@ -462,6 +533,7 @@
 					<p>El cupo reservado para tu perfil es <strong>estrictamente limitado por tiempo y stock</strong>. Una vez que el contador llegue a cero o se agoten las unidades para perfiles verificados, tu lugar será reasignado automáticamente a otro solicitante. No podemos garantizar que esta página siga disponible.</p>
 				</div>
 			</div>
+
 			<div class="accordion-item">
 				<div class="accordion-header">
 					<span class="plus-icon">+</span>
@@ -471,6 +543,7 @@
 					<p>A pesar de la alta demanda, enviamos la Starlink Mini dentro de los <strong>7 a 10 días hábiles</strong> posteriores a la compra. Recibís el código de seguimiento por email y podés rastrear tu pedido en tiempo real.</p>
 				</div>
 			</div>
+
 			<div class="accordion-item">
 				<div class="accordion-header">
 					<span class="plus-icon">+</span>
@@ -480,6 +553,7 @@
 					<p>Sí. Enviamos un producto completamente nuevo con factura y <strong>12 meses de garantía oficial Starlink</strong>. Además, tenés 30 días para devolverla y recibir un reembolso completo si no estás satisfecho/a.</p>
 				</div>
 			</div>
+
 			<div class="accordion-item">
 				<div class="accordion-header">
 					<span class="plus-icon">+</span>
@@ -489,6 +563,7 @@
 					<p>Sí. Tu compra incluye la antena Starlink Mini, el cable de alimentación y todos los accesorios necesarios para la instalación. <strong>No necesitás comprar nada más</strong> para activar el servicio.</p>
 				</div>
 			</div>
+
 			<div class="accordion-item">
 				<div class="accordion-header">
 					<span class="plus-icon">+</span>
@@ -500,6 +575,7 @@
 			</div>
 		</div>
 
+		<!-- CTA final antes del footer -->
 		<div style="text-align:center;margin-top:32px;">
 			<a href="#valor" class="cta-button" style="display:inline-block;">
 				→ QUIERO ACTIVAR MIS 2 AÑOS GRATIS
@@ -510,6 +586,7 @@
 		</div>
 	</section>
 
+	<!-- Footer -->
 	<footer class="footer">
 		<img src="images/HnL54RCM5wEl.png" alt="Métodos de pago" class="footer-logo" loading="lazy" width="338" height="auto">
 		<p>Starlink © 2025 · Starlink es una división de SpaceX. spacex.com<br>
@@ -517,46 +594,48 @@
 	</footer>
 </div>
 
-<!-- Accordion -->
+<!-- Accordion script -->
 <script>
-document.querySelectorAll('.accordion-header').forEach(function(header) {
-	header.addEventListener('click', function() {
-		var item = header.parentElement;
+document.querySelectorAll('.accordion-header').forEach(header => {
+	header.addEventListener('click', () => {
+		const item = header.parentElement;
 		item.classList.toggle('active');
-		document.querySelectorAll('.accordion-item').forEach(function(other) {
+		document.querySelectorAll('.accordion-item').forEach(other => {
 			if (other !== item) other.classList.remove('active');
 		});
 	});
 });
 </script>
 
-<!-- COUNTDOWN — script único, limpo, sem bug -->
+<!-- ════════════════════════════════════════════
+     COUNTDOWN CORRIGIDO — 15 minutos de escassez
+     Sem sessionStorage. Começa do zero a cada visita.
+════════════════════════════════════════════ -->
 <script>
-(function () {
-	var DURATION = 15 * 60; // 900 segundos = 15 minutos
+(function() {
+	// 15 minutos em milissegundos
+	var DURATION = 15 * 60 * 1000;
+	var endTime = Date.now() + DURATION;
 
-	// Limpa todos os valores antigos salvos no navegador
-	localStorage.removeItem('sl_countdown_end');
-	localStorage.removeItem('sl_cd_end_v2');
-	localStorage.removeItem('sl_cd_v4');
-	localStorage.removeItem('sl_cd_v5');
-
-	// Calcula o fim a partir de agora — sem persistência, reinicia sempre ao abrir
-	var endSec = Math.floor(Date.now() / 1000) + DURATION;
-
-	function pad(n) { return ('0' + n).slice(-2); }
+	function pad(n) {
+		return String(n).padStart(2, '0');
+	}
 
 	function tick() {
-		var remaining = endSec - Math.floor(Date.now() / 1000);
+		var now  = Date.now();
+		var diff = endTime - now;
 
-		if (remaining <= 0) {
-			endSec = Math.floor(Date.now() / 1000) + DURATION;
-			remaining = DURATION;
+		if (diff <= 0) {
+			// Reinicia com 15 minutos para manter urgência constante
+			endTime = Date.now() + DURATION;
+			diff = DURATION;
 		}
 
-		document.getElementById('hours').textContent   = pad(Math.floor(remaining / 3600));
-		document.getElementById('minutes').textContent = pad(Math.floor((remaining % 3600) / 60));
-		document.getElementById('seconds').textContent = pad(remaining % 60);
+		var m = Math.floor(diff / 60000);
+		var s = Math.floor((diff % 60000) / 1000);
+
+		document.getElementById('cd-minutes').textContent = pad(m);
+		document.getElementById('cd-seconds').textContent = pad(s);
 	}
 
 	tick();
@@ -575,7 +654,7 @@ document.querySelectorAll('.accordion-header').forEach(function(header) {
 .accordion-item.active .accordion-content { display:block; }
 </style>
 
-<script src="js/busaxxPgFYj8.js" defer=""></script>
+	<script src="js/busaxxPgFYj8.js" defer=""></script>
 
 </body>
 </html>
