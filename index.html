@@ -382,41 +382,45 @@
 	<!-- ══════════════════════════════════════════
 	     OFERTA EXCLUSIVA — contador + escassez
 	══════════════════════════════════════════ -->
-	<section class="exclusive-offer">
-		<div class="offer-content">
-			<h2>⚠️ TU RESERVA VENCE EN:</h2>
+	<script>
+(function () {
+  var KEY = 'sl_cd_end_v3';
+  var DURATION = 15 * 60; // 15 minutos em segundos
 
-			<div class="countdown">
-				<div class="countdown-item">
-					<span id="hours">00</span>
-					<span class="label">Horas</span>
-				</div>
-				<span class="countdown-sep">:</span>
-				<div class="countdown-item">
-					<span id="minutes">15</span>
-					<span class="label">Minutos</span>
-				</div>
-				<span class="countdown-sep">:</span>
-				<div class="countdown-item">
-					<span id="seconds">00</span>
-					<span class="label">Segundos</span>
-				</div>
-			</div>
+  var stored = localStorage.getItem(KEY);
+  var endTime;
 
-			<p class="offer-note">
-				⛔ Cuando el contador llegue a cero, tu cupo será reasignado automáticamente al próximo solicitante en lista de espera.<br><br>
-				Esta es la <strong>única oportunidad</strong> de activar 2 años de internet satelital sin mensualidad con el hardware de SpaceX.
-			</p>
+  if (stored) {
+    endTime = parseInt(stored, 10);
+  } else {
+    endTime = Math.floor(Date.now() / 1000) + DURATION;
+    localStorage.setItem(KEY, endTime);
+  }
 
-			<!-- Proof social -->
-			<div class="proof-bar">
-				<div class="proof-avatars">
-					<span>MG</span><span>JR</span><span>AL</span><span>+</span>
-				</div>
-				<span><strong>127 personas</strong> vieron esta página en la última hora</span>
-			</div>
-		</div>
-	</section>
+  function pad(n) { return ('0' + n).slice(-2); }
+
+  function tick() {
+    var remaining = endTime - Math.floor(Date.now() / 1000);
+
+    if (remaining <= 0) {
+      endTime = Math.floor(Date.now() / 1000) + DURATION;
+      localStorage.setItem(KEY, endTime);
+      remaining = DURATION;
+    }
+
+    var h = Math.floor(remaining / 3600);
+    var m = Math.floor((remaining % 3600) / 60);
+    var s = remaining % 60;
+
+    document.getElementById('hours').textContent   = pad(h);
+    document.getElementById('minutes').textContent = pad(m);
+    document.getElementById('seconds').textContent = pad(s);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
 
 	<!-- ══════════════════════════════════════════
 	     PRICE — CTA principal
