@@ -347,25 +347,37 @@
 	</section>
 
 	<section class="exclusive-offer">
-		<div class="offer-content">
-			<h2>⚠️ TU RESERVA VENCE EN:</h2>
+		<!-- COUNTDOWN — 15 minutos -->
+<script>
+(function () {
+	var DURATION = 15 * 60; // 900 segundos
+	var endSec = Math.floor(Date.now() / 1000) + DURATION;
 
-			<div class="countdown">
-				<div class="countdown-item">
-					<span id="hours">00</span>
-					<span class="label">Horas</span>
-				</div>
-				<span class="countdown-sep">:</span>
-				<div class="countdown-item">
-					<span id="minutes">15</span>
-					<span class="label">Minutos</span>
-				</div>
-				<span class="countdown-sep">:</span>
-				<div class="countdown-item">
-					<span id="seconds">00</span>
-					<span class="label">Segundos</span>
-				</div>
-			</div>
+	// Limpa qualquer chave antiga
+	localStorage.removeItem('sl_countdown_end');
+	localStorage.removeItem('sl_cd_end_v2');
+	localStorage.removeItem('sl_cd_v4');
+	localStorage.removeItem('sl_cd_v5');
+
+	function pad(n) { return ('0' + n).slice(-2); }
+
+	function tick() {
+		var remaining = endSec - Math.floor(Date.now() / 1000);
+
+		if (remaining <= 0) {
+			endSec = Math.floor(Date.now() / 1000) + DURATION;
+			remaining = DURATION;
+		}
+
+		document.getElementById('hours').textContent   = pad(Math.floor(remaining / 3600));
+		document.getElementById('minutes').textContent = pad(Math.floor((remaining % 3600) / 60));
+		document.getElementById('seconds').textContent = pad(remaining % 60);
+	}
+
+	tick();
+	setInterval(tick, 1000);
+})();
+</script>
 
 			<p class="offer-note">
 				⛔ Cuando el contador llegue a cero, tu cupo será reasignado automáticamente al próximo solicitante en lista de espera.<br><br>
