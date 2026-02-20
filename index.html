@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+	<meta charset="UTF-8">
+	<title>Starlink Mini · Your 2-Year Free Internet Access</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="You have been selected to receive 2 years of free satellite internet. You only need the Starlink Mini dish to activate your plan.">
+	<meta name="robots" content="index, follow">
+	<meta name="theme-color" content="#000000">
+
+	<link rel="preload" href="css/GJX3QLZd7PGy.css" as="style">
+	<link rel="preload" href="images/background_top.png" as="image">
+	<link rel="preload" href="images/nah0YLRCnSDc.png" as="image">
+	<link rel="preconnect" href="https://fonts.googleapis.com/">
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/GJX3QLZd7PGy.css">
+
+	<!-- Clarity -->
+	<script type="text/javascript">
+		(function(c,l,a,r,i,t,y){
+			c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+			t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+			y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+		})(window, document, "clarity", "script", "qf5sz4pb9p");
+	</script>
+
+	<style>
+		/* ── FIX: RESPONSIVE MOBILE IMAGES ── */
+		.benefit-item img,
+		.benefit-item {
+			width: 100%;
+			max-width: 100%;
+			display: block;
+		}
+		.benefit-grid {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			width: 100%;
+			padding: 0 16px;
+			box-sizing: border-box;
+		}
+		.benefit-item {
+			width: 100%;
+			border-radius: 10px;
+			overflow: hidden;
+		}
+		.benefit-item img {
+			width: 100%;
+			height: auto;
+			object-fit: cover;
+			display: block;
+			border-radius: 10px;
+		}
+
+		/* ── ELIGIBILITY BANNER ── */
+		.eligibility-banner {
+			background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
+			border: 1px solid rgba(255,255,255,0.12);
+			border-left: 3px solid #fff;
+			border-radius: 10px;
+			padding: 18px 20px;
+			margin: 0 auto 28px;
+			max-width: 560px;
+			display: flex;
+			align-items: flex-start;
+			gap: 14px;
+		}
+		.eligibility-icon {
+			width: 36px; height: 36px; min-width: 36px;
+			background: rgba(255,255,255,0.07);
+			border: 1px solid rgba(255,255,255,0.15);
+			border-radius: 50%;
+			display: flex; align-items: center; justify-content: center;
+			font-size: 1rem;
+		}
+		.eligibility-text strong {
+			display: block;
+			font-size: 0.75rem;
+			font-weight: 700;
+			letter-spacing: 0.14em;
+			color: rgba(255,255,255,0.5);
+			text-transform: uppercase;
+			margin-bottom: 4px;
+		}
+		.eligibility-text p {
+			font-size: 0.9rem;
+			color: rgba(255,255,255,0.85);
+			line-height: 1.45;
+			margin: 0 !important;
+		}
+
+		/* ── URGENT STOCK ALERT ── */
+		.stock-alert {
+			background: rgba(255,50,50,0.07);
+			border: 1px solid rgba(255,50,50,0.2);
+			border-radius: 8px;
+			padding: 12px 16px;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			max-width: 560px;
+			margin: 0 auto 20px;
+		}
+		.stock-alert-dot {
+			width: 8px; height: 8px; min-width: 8px;
+			background: #ff3c3c;
+			border-radius: 50%;
+			box-shadow: 0 0 8px rgba(255,60,60,0.7);
+			animation: blink 1.2s ease infinite;
+		}
+		@keyframes blink {
+			0%,100%{opacity:1;transform:scale(1)}
+			50%{opacity:0.4;transform:scale(0.7)}
+		}
+		.stock-alert p {
+			font-size: 0.8rem;
+			color: #ff8888;
+			margin: 0 !important;
+			line-height: 1.4;
+			font-weight: 500;
+		}
+		.stock-alert strong { color: #ffaaaa; }
+
+		/* ── HOW IT WORKS ── */
+		.how-section {
+			background: #0d0d0d;
+			border-top: 1px solid rgba(255,255,255,0.06);
+			border-bottom: 1px solid rgba(255,255,255,0.06);
+			padding: 40px 24px;
+			text-align: center;
+		}
+		.how-section h2 {
+			font-size: clamp(1.1rem, 4vw, 1.4rem);
+			font-weight: 700;
+			letter-spacing: 0.08em;
+			margin-bottom: 28px;
+			color: #fff;
+		}
+		.steps-grid {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			max-width: 480px;
+			margin: 0 auto;
+		}
+		.step-item {
+			display: flex;
+			align-items: flex-start;
+			gap: 14px;
+			text-align: left;
+			background: rgba(255,255,255,0.03);
+			border: 1px solid rgba(255,255,255,0.07);
+			border-radius: 10px;
+			padding: 14px 16px;
+		}
+		.step-num {
+			width: 30px; height: 30px; min-width: 30px;
+			background: #fff;
+			color: #000;
+			border-radius: 50%;
+			display: flex; align-items: center; justify-content: center;
+			font-size: 0.8rem;
+			font-weight: 700;
+		}
+		.step-text strong {
+			display: block;
+			font-size: 0.85rem;
+			font-weight: 700;
+			color: #fff;
+			margin-bottom: 3px;
+		}
+		.step-text p {
+			font-size: 0.78rem;
+			color: rgba(255,255,255,0.45);
+			margin: 0 !important;
+			line-height: 1.4;
+		}
+		.step-check {
+			color: rgba(255,255,255,0.6);
+			font-size: 0.9rem;
+			margin-top: 2px;
+		}
+
+		/* ── COUNTDOWN ── */
+		.countdown {
+			display: flex;
+			gap: 16px;
+			justify-content: center;
+			margin: 20px auto;
+		}
+		.countdown-item {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 4px;
+		}
+		.countdown-item span:first-child {
+			font-size: 2.2rem;
+			font-weight: 700;
+			color: #fff;
+			line-height: 1;
+			font-variant-numeric: tabular-nums;
+		}
+		.countdown-item .label {
+			font-size: 0.6rem;
+			letter-spacing: 0.14em;
+			color: rgba(255,255,255,0.35);
+			text-transform: uppercase;
+		}
+		.countdown-sep {
+			font-size: 2rem;
+			color: rgba(255,255,255,0.3);
+			line-height: 1.1;
+			align-self: center;
+			margin-bottom: 14px;
+		}
+
+		/* ── SOCIAL PROOF ── */
+		.proof-bar {
+			background: rgba(255,255,255,0.03);
+			border: 1px solid rgba(255,255,255,0.07);
+			border-radius: 10px;
+			padding: 14px 18px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+			max-width: 420px;
+			margin: 0 auto 24px;
+			font-size: 0.82rem;
+			color: rgba(255,255,255,0.55);
+		}
+		.proof-bar strong { color: #fff; }
+		.proof-avatars { display: flex; }
+		.proof-avatars span {
+			width: 24px; height: 24px;
+			background: rgba(255,255,255,0.15);
+			border: 2px solid #0c0c0c;
+			border-radius: 50%;
+			display: flex; align-items: center; justify-content: center;
+			font-size: 0.6rem;
+			margin-left: -6px;
+		}
+		.proof-avatars span:first-child { margin-left: 0; }
+
+		/* ── GUARANTEE ── */
+		.guarantee-box {
+			background: rgba(255,255,255,0.02);
+			border: 1px solid rgba(255,255,255,0.08);
+			border-radius: 10px;
+			padding: 16px 18px;
+			display: flex;
+			align-items: flex-start;
+			gap: 12px;
+			max-width: 480px;
+			margin: 16px auto 0;
+			text-align: left;
+		}
+		.guarantee-icon { font-size: 1.4rem; line-height: 1; }
+		.guarantee-box strong { display: block; font-size: 0.8rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
+		.guarantee-box p { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin: 0 !important; line-height: 1.5; }
+
+		/* ── OVERRIDE ORIGINAL STYLES ── */
+		.price-section .discount-badge {
+			background: #fff;
+			color: #000;
+			font-weight: 800;
+		}
+		.cta-button, .buy-button {
+			position: relative;
+			overflow: hidden;
+		}
+	</style>
+</head>
+
+<body class="starlink-page">
+<div class="container">
+
+	<img src="images/LPinbugqMeKS.png" alt="Starlink Mini" class="logo" width="272" height="auto">
+
+	<!-- ══════════════════════════════════════════
+	     HEADER — Eligibility Hook
+	══════════════════════════════════════════ -->
+	<header class="header">
+		<h1>YOU'VE BEEN SELECTED!</h1>
+		<h2>YOUR SPOT FOR<br>2 YEARS OF FREE INTERNET<br>HAS BEEN RESERVED</h2>
+		<p class="subtitle">
+			El programa de verificación confirmó tu elegibilidad.<br>
+			You only need the Starlink Mini dish to activate your 2-year plan with no monthly fees.
+		</p>
+		<a href="#valor" class="cta-button">ACTIVATE MY 2 FREE YEARS →</a>
+	</header>
+
+	<!-- Confirmed eligibility banner -->
+	<div class="eligibility-banner">
+		<div class="eligibility-icon">✓</div>
+		<div class="eligibility-text">
+			<strong>Verification Complete</strong>
+			<p>Your profile has been approved to receive <strong>2 years of satellite internet with no monthly cost</strong>. The hardware is the only requirement to activate the service.</p>
+		</div>
+	</div>
+
+	<!-- Stock alert -->
+	<div class="stock-alert">
+		<span class="stock-alert-dot"></span>
+		<p>⚠️ <strong>Very few units remaining.</strong> Spots are being assigned right now — if you close this page, your place may be taken by another applicant.</p>
+	</div>
+
+	<!-- ══════════════════════════════════════════
+	     HOW IT WORKS — 3 Simple Steps
+	══════════════════════════════════════════ -->
+	<section class="how-section">
+		<h2>HOW DOES YOUR FREE PLAN WORK?</h2>
+		<div class="steps-grid">
+			<div class="step-item">
+				<div class="step-num">1</div>
+				<div class="step-text">
+					<strong>Purchase the Starlink Mini Dish</strong>
+					<p>It's the only payment you'll make. No contracts, no instalments, no surprises.</p>
+				</div>
+				<span class="step-check">✓</span>
+			</div>
+			<div class="step-item">
+				<div class="step-num">2</div>
+				<div class="step-text">
+					<strong>Delivered to Your Door in 7–10 Business Days</strong>
+					<p>Setup in minutes. No technician needed. No construction. Connected from day one.</p>
+				</div>
+				<span class="step-check">✓</span>
+			</div>
+			<div class="step-item">
+				<div class="step-num">3</div>
+				<div class="step-text">
+					<strong>Activate Your 2 Years of Free Internet</strong>
+					<p>No monthly fees. Unlimited data. High-speed satellite internet wherever you are.</p>
+				</div>
+				<span class="step-check">✓</span>
+			</div>
+		</div>
+	</section>
+
+	<!-- ══════════════════════════════════════════
+	     BENEFITS — CORRECTED IMAGES
+	══════════════════════════════════════════ -->
+	<section class="benefits">
+		<div class="benefit-grid">
+			<div class="benefit-item">
+				<!-- FIXED: .webp extension lowercase -->
+				<img src="images/3OP2w000xvZQ.png" alt="High Speed" loading="lazy" width="100%" height="auto">
+			</div>
+			<div class="benefit-item">
+				<!-- FIXED: was .Webp now .webp -->
+				<img src="images/xe0bqnJe2arO.png" alt="No Monthly Fee" loading="lazy" width="100%" height="auto">
+			</div>
+			<div class="benefit-item">
+				<!-- FIXED: was .Webp now .webp -->
+				<img src="images/vME2WiL8IfUC.png" alt="Simple Installation" loading="lazy" width="100%" height="auto">
+			</div>
+		</div>
+		<h2>HIGH-SPEED SATELLITE INTERNET — NO MONTHLY FEES FOR 2 YEARS</h2>
+	</section>
+
+	<!-- ══════════════════════════════════════════
+	     CONNECTIVITY — Pain Hook
+	══════════════════════════════════════════ -->
+	<section class="conectivity">
+		<div class="conectivity-content">
+			<h2>INTERNET WHERE<br>OTHERS CAN'T REACH</h2>
+			<p>
+				Streaming, video calls, remote work, online classes, gaming — all without depending on cables or providers that never reached your area.<br><br>
+				<strong>You were selected because your profile is an exact match for the satellite coverage programme.</strong> This is your moment to make the leap.
+			</p>
+			<a href="#valor" class="cta-button">ACTIVATE MY 2 FREE YEARS →</a>
+			<div class="conectivity-spacer"></div>
+			<p class="disclaimer">
+				* Units are very limited. Your spot is reserved but not guaranteed if you do not complete the purchase.<br>
+				** This offer is only available to profiles verified through the official programme.
+			</p>
+		</div>
+	</section>
+
+	<!-- ══════════════════════════════════════════
+	     TRIAL — Rewritten as Guarantee
+	══════════════════════════════════════════ -->
+	<section class="trial">
+		<div class="trial-content">
+			<h2>BUY WITH CONFIDENCE:<br><span class="highlight">30-DAY FULL GUARANTEE</span></h2>
+			<p>
+				If within 30 days you're not satisfied with the connection,<br>
+				return the dish and we'll refund 100% of your money.<br>
+				<strong>No questions. No hassle.</strong>
+			</p>
+			<a href="#valor" class="cta-button">I WANT MY 2 FREE YEARS →</a>
+		</div>
+	</section>
+
+	<!-- ══════════════════════════════════════════
+	     SPACEX — Credibility
+	══════════════════════════════════════════ -->
+	<section class="spacex-section">
+		<div class="spacex-content">
+			<h2>TECHNOLOGY DEVELOPED BY SPACEX</h2>
+			<p>
+				SpaceX is the world leader in satellite launches and the only company on Earth operating reusable orbital rockets. The Starlink network is the largest satellite constellation in history — over 6,000 satellites ensure your connection from anywhere on the planet.<br><br>
+				<strong>This isn't the future. It's now. And your spot has already been verified.</strong>
+			</p>
+		</div>
+	</section>
+
+	<!-- ══════════════════════════════════════════
+	     EXCLUSIVE OFFER — FIXED 15 MIN COUNTDOWN
+	══════════════════════════════════════════ -->
+	<section class="exclusive-offer">
+		<div class="offer-content">
+			<h2>⚠️ YOUR RESERVATION EXPIRES IN:</h2>
+
+			<div class="countdown">
+				<div class="countdown-item">
+					<span id="cd-minutes">15</span>
+					<span class="label">Minutes</span>
+				</div>
+				<span class="countdown-sep">:</span>
+				<div class="countdown-item">
+					<span id="cd-seconds">00</span>
+					<span class="label">Seconds</span>
+				</div>
+			</div>
+
+			<p class="offer-note">
+				⛔ When the countdown reaches zero, your spot will be automatically reassigned to the next applicant on the waiting list.<br><br>
+				This is your <strong>one opportunity</strong> to activate 2 years of satellite internet with no monthly fee using SpaceX hardware.
+			</p>
+
+			<!-- Proof social -->
+			<div class="proof-bar">
+				<div class="proof-avatars">
+					<span>MG</span><span>JR</span><span>AL</span><span>+</span>
+				</div>
+				<span><strong>127 people</strong> have viewed this page in the last hour</span>
+			</div>
+		</div>
+	</section>
+
+	<!-- ══════════════════════════════════════════
+	     PRICE — Main CTA
+	══════════════════════════════════════════ -->
+	<section id="valor" class="price-section">
+		<div class="price-content">
+			<img src="images/nah0YLRCnSDc.png" alt="Starlink Mini Dish" class="price-image" loading="lazy">
+
+			<h2>STARLINK MINI DISH</h2>
+			<p style="font-size:0.85rem;color:rgba(255,255,255,0.5);margin-bottom:12px;letter-spacing:0.06em;text-transform:uppercase;">The only step to activate your 2 free years</p>
+			<p class="no-fees">ZERO MONTHLY FEES FOR 2 YEARS</p>
+
+			<div class="discount-badge">Save 93%!</div>
+
+			<div class="price-info">
+				<p class="original-price">Regular Price: $649.99 CAD</p>
+				<p class="final-price">Today: $67.05 CAD</p>
+			</div>
+
+			<!-- Alerta de urgência embaixo do preço -->
+			<div class="stock-alert" style="margin-top:24px; margin-bottom:16px;">
+				<span class="stock-alert-dot"></span>
+				<p>Only <strong>a few units</strong> remain available for verified profiles. We cannot guarantee stock after today.</p>
+			</div>
+
+			<a href="https://www.ofertalimite.store/cart/52297225830679:1?checkout" class="buy-button">
+				✓ ACTIVATE MY 2 FREE YEARS
+			</a>
+
+			<p class="stock-info">
+				* Your verified spot does not guarantee the dish if stock runs out.<br>
+				More than 90% of units for selected profiles have already been claimed.
+			</p>
+
+			<!-- Garantia -->
+			<div class="guarantee-box">
+				<span class="guarantee-icon">🛡️</span>
+				<div>
+					<strong>Full 30-day guarantee + 12-month official Starlink warranty</strong>
+					<p>If you're not satisfied, return it and we'll refund 100%. No conditions.</p>
+				</div>
+			</div>
+
+			<img src="images/OvOaDZSdghxc.png" alt="Secure Payment" class="checkout-secure-img" loading="lazy" style="margin-top:16px;">
+		</div>
+	</section>
+
+	<!-- ══════════════════════════════════════════
+	     INCLUDED — What You Receive
+	══════════════════════════════════════════ -->
+	<section class="included-section">
+		<div class="included-content">
+			<h2>Everything You Receive to Activate Your 2 Years:</h2>
+			<div class="included-items">
+				<div class="included-item">
+					<img src="images/iSkAyJdqfnwf.png" alt="Starlink Mini Dish" class="included-image" loading="lazy">
+				</div>
+				<div class="included-item">
+					<img src="images/ygrb9PnLjCY5.png" alt="Cable and accessories" class="included-image" loading="lazy">
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ══════════════════════════════════════════
+	     FAQ — Rewritten for Programme Context
+	══════════════════════════════════════════ -->
+	<section class="faq">
+		<h2>Frequently Asked Questions</h2>
+
+		<div class="accordion">
+			<div class="accordion-item">
+				<div class="accordion-header">
+					<span class="plus-icon">+</span>
+					<h3>Why do I have to pay if I was told the internet is free?</h3>
+				</div>
+				<div class="accordion-content">
+					<p>The <strong>internet service is 100% free for 2 years</strong> — you pay no monthly fee during that period. The only thing you acquire is the physical hardware (the dish), which is required to receive the satellite signal. It's like having an over-the-air TV: the channel doesn't charge you, but you need a TV set to watch it.</p>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<div class="accordion-header">
+					<span class="plus-icon">+</span>
+					<h3>How long does the offer last for my profile?</h3>
+				</div>
+				<div class="accordion-content">
+					<p>The spot reserved for your profile is <strong>strictly limited by time and stock</strong>. Once the countdown reaches zero or units for verified profiles run out, your place will be automatically reassigned to another applicant. We cannot guarantee this page will remain available.</p>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<div class="accordion-header">
+					<span class="plus-icon">+</span>
+					<h3>How long until I receive the dish?</h3>
+				</div>
+				<div class="accordion-content">
+					<p>Despite high demand, we ship the Starlink Mini within <strong>7 to 10 business days</strong> of purchase. You will receive a tracking code by email and can track your order in real time.</p>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<div class="accordion-header">
+					<span class="plus-icon">+</span>
+					<h3>Does the dish come with a warranty?</h3>
+				</div>
+				<div class="accordion-content">
+					<p>Yes. We ship a brand-new product with an invoice and <strong>12 months of official Starlink warranty</strong>. You also have 30 days to return it and receive a full refund if you're not satisfied.</p>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<div class="accordion-header">
+					<span class="plus-icon">+</span>
+					<h3>Does the dish include all accessories?</h3>
+				</div>
+				<div class="accordion-content">
+					<p>Yes. Your purchase includes the Starlink Mini dish, the power cable, and all accessories needed for installation. <strong>You do not need to purchase anything else</strong> to activate the service.</p>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<div class="accordion-header">
+					<span class="plus-icon">+</span>
+					<h3>What happens after the 2 years?</h3>
+				</div>
+				<div class="accordion-content">
+					<p>After the free period, you can continue the service with Starlink's standard monthly plan or simply cancel. The dish is yours — you can use it however you like. <strong>No lock-in contracts.</strong></p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Final CTA before footer -->
+		<div style="text-align:center;margin-top:32px;">
+			<a href="https://www.ofertalimite.store/cart/52297225830679:1?checkout" class="cta-button" style="display:inline-block;">
+				→ I WANT TO ACTIVATE MY 2 FREE YEARS
+			</a>
+			<p style="font-size:0.72rem;color:rgba(255,255,255,0.25);margin-top:10px;">
+				Limited spots · Stock almost depleted · Offer for verified profiles only
+			</p>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<img src="images/HnL54RCM5wEl.png" alt="Payment Methods" class="footer-logo" loading="lazy" width="338" height="auto">
+		<p>Starlink © 2025 · Starlink is a division of SpaceX. spacex.com<br>
+		<span style="font-size:0.7rem;color:rgba(255,255,255,0.25);">This offer is exclusive to profiles approved through official programme verification.</span></p>
+	</footer>
+</div>
+
+<!-- Accordion script -->
+<script>
+document.querySelectorAll('.accordion-header').forEach(header => {
+	header.addEventListener('click', () => {
+		const item = header.parentElement;
+		item.classList.toggle('active');
+		document.querySelectorAll('.accordion-item').forEach(other => {
+			if (other !== item) other.classList.remove('active');
+		});
+	});
+});
+</script>
+
+<!-- ════════════════════════════════════════════
+     CORRECTED COUNTDOWN — 15 minutes of scarcity
+     No sessionStorage. Resets on every visit.
+════════════════════════════════════════════ -->
+<script>
+(function() {
+	// 15 minutes in milliseconds
+	var DURATION = 15 * 60 * 1000;
+	var endTime = Date.now() + DURATION;
+
+	function pad(n) {
+		return String(n).padStart(2, '0');
+	}
+
+	function tick() {
+		var now  = Date.now();
+		var diff = endTime - now;
+
+		if (diff <= 0) {
+			// Reset to 15 minutes to maintain constant urgency
+			endTime = Date.now() + DURATION;
+			diff = DURATION;
+		}
+
+		var m = Math.floor(diff / 60000);
+		var s = Math.floor((diff % 60000) / 1000);
+
+		document.getElementById('cd-minutes').textContent = pad(m);
+		document.getElementById('cd-seconds').textContent = pad(s);
+	}
+
+	tick();
+	setInterval(tick, 1000);
+})();
+</script>
+
+<style>
+.accordion { width:100%; max-width:800px; margin:0 auto; border-radius:8px; overflow:hidden; color:#fff; font-family:Arial,sans-serif; }
+.accordion-item { border-bottom:1px solid #333; }
+.accordion-header { display:flex; justify-content:space-between; align-items:center; cursor:pointer; padding:15px 20px; background-color:#2a2a2a; transition:background-color 0.3s; }
+.accordion-header:hover { background-color:#333; }
+.accordion-header h3 { font-size:16px; margin:0; color:#fff; font-weight:500; }
+.plus-icon { font-size:22px; margin-right:10px; color:#fdfdfd; }
+.accordion-content { display:none; padding:15px 20px; background-color:#1f1f1f; font-size:14px; line-height:1.6; color:#ccc; }
+.accordion-item.active .accordion-content { display:block; }
+</style>
+
+	<script src="js/busaxxPgFYj8.js" defer=""></script>
+
+</body>
+</html>

