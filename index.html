@@ -346,38 +346,30 @@
 		</div>
 	</section>
 
+	<!-- ══════════════════════════════════════════
+	     OFERTA EXCLUSIVA — contador
+	══════════════════════════════════════════ -->
 	<section class="exclusive-offer">
-		<!-- COUNTDOWN — 15 minutos -->
-<script>
-(function () {
-	var DURATION = 15 * 60; // 900 segundos
-	var endSec = Math.floor(Date.now() / 1000) + DURATION;
+		<div class="offer-content">
+			<h2>⚠️ TU RESERVA VENCE EN:</h2>
 
-	// Limpa qualquer chave antiga
-	localStorage.removeItem('sl_countdown_end');
-	localStorage.removeItem('sl_cd_end_v2');
-	localStorage.removeItem('sl_cd_v4');
-	localStorage.removeItem('sl_cd_v5');
-
-	function pad(n) { return ('0' + n).slice(-2); }
-
-	function tick() {
-		var remaining = endSec - Math.floor(Date.now() / 1000);
-
-		if (remaining <= 0) {
-			endSec = Math.floor(Date.now() / 1000) + DURATION;
-			remaining = DURATION;
-		}
-
-		document.getElementById('hours').textContent   = pad(Math.floor(remaining / 3600));
-		document.getElementById('minutes').textContent = pad(Math.floor((remaining % 3600) / 60));
-		document.getElementById('seconds').textContent = pad(remaining % 60);
-	}
-
-	tick();
-	setInterval(tick, 1000);
-})();
-</script>
+			<!-- HTML DO COUNTDOWN — não remover -->
+			<div class="countdown">
+				<div class="countdown-item">
+					<span id="hours">00</span>
+					<span class="label">Horas</span>
+				</div>
+				<span class="countdown-sep">:</span>
+				<div class="countdown-item">
+					<span id="minutes">15</span>
+					<span class="label">Minutos</span>
+				</div>
+				<span class="countdown-sep">:</span>
+				<div class="countdown-item">
+					<span id="seconds">00</span>
+					<span class="label">Segundos</span>
+				</div>
+			</div>
 
 			<p class="offer-note">
 				⛔ Cuando el contador llegue a cero, tu cupo será reasignado automáticamente al próximo solicitante en lista de espera.<br><br>
@@ -461,7 +453,6 @@
 					<p>El <strong>servicio de internet es 100% gratuito por 2 años</strong> — no pagás ninguna mensualidad durante ese período. Lo único que adquirís es el hardware físico (la antena), que es necesario para recibir la señal satelital. Es igual que tener un TV de aire: el canal no te cobra, pero necesitás el televisor para verlo.</p>
 				</div>
 			</div>
-
 			<div class="accordion-item">
 				<div class="accordion-header">
 					<span class="plus-icon">+</span>
@@ -471,7 +462,6 @@
 					<p>El cupo reservado para tu perfil es <strong>estrictamente limitado por tiempo y stock</strong>. Una vez que el contador llegue a cero o se agoten las unidades para perfiles verificados, tu lugar será reasignado automáticamente a otro solicitante. No podemos garantizar que esta página siga disponible.</p>
 				</div>
 			</div>
-
 			<div class="accordion-item">
 				<div class="accordion-header">
 					<span class="plus-icon">+</span>
@@ -481,7 +471,6 @@
 					<p>A pesar de la alta demanda, enviamos la Starlink Mini dentro de los <strong>7 a 10 días hábiles</strong> posteriores a la compra. Recibís el código de seguimiento por email y podés rastrear tu pedido en tiempo real.</p>
 				</div>
 			</div>
-
 			<div class="accordion-item">
 				<div class="accordion-header">
 					<span class="plus-icon">+</span>
@@ -491,7 +480,6 @@
 					<p>Sí. Enviamos un producto completamente nuevo con factura y <strong>12 meses de garantía oficial Starlink</strong>. Además, tenés 30 días para devolverla y recibir un reembolso completo si no estás satisfecho/a.</p>
 				</div>
 			</div>
-
 			<div class="accordion-item">
 				<div class="accordion-header">
 					<span class="plus-icon">+</span>
@@ -501,7 +489,6 @@
 					<p>Sí. Tu compra incluye la antena Starlink Mini, el cable de alimentación y todos los accesorios necesarios para la instalación. <strong>No necesitás comprar nada más</strong> para activar el servicio.</p>
 				</div>
 			</div>
-
 			<div class="accordion-item">
 				<div class="accordion-header">
 					<span class="plus-icon">+</span>
@@ -530,37 +517,32 @@
 	</footer>
 </div>
 
-<!-- Accordion script -->
+<!-- Accordion -->
 <script>
-document.querySelectorAll('.accordion-header').forEach(header => {
-	header.addEventListener('click', () => {
-		const item = header.parentElement;
+document.querySelectorAll('.accordion-header').forEach(function(header) {
+	header.addEventListener('click', function() {
+		var item = header.parentElement;
 		item.classList.toggle('active');
-		document.querySelectorAll('.accordion-item').forEach(other => {
+		document.querySelectorAll('.accordion-item').forEach(function(other) {
 			if (other !== item) other.classList.remove('active');
 		});
 	});
 });
 </script>
 
-<!-- ══════════════════════════════════════════
-     COUNTDOWN — 15 minutos, corrigido
-     Opera em segundos inteiros para evitar
-     saltos e drift do setInterval.
-══════════════════════════════════════════ -->
+<!-- COUNTDOWN — script único, limpo, sem bug -->
 <script>
 (function () {
-	var KEY = 'sl_cd_v5';
 	var DURATION = 15 * 60; // 900 segundos = 15 minutos
 
-	var stored = localStorage.getItem(KEY);
-	var endSec = stored ? parseInt(stored, 10) : 0;
+	// Limpa todos os valores antigos salvos no navegador
+	localStorage.removeItem('sl_countdown_end');
+	localStorage.removeItem('sl_cd_end_v2');
+	localStorage.removeItem('sl_cd_v4');
+	localStorage.removeItem('sl_cd_v5');
 
-	// Se não existe ou já passou mais tempo que a duração, cria novo
-	if (!endSec || endSec < Math.floor(Date.now() / 1000) - DURATION) {
-		endSec = Math.floor(Date.now() / 1000) + DURATION;
-		localStorage.setItem(KEY, endSec);
-	}
+	// Calcula o fim a partir de agora — sem persistência, reinicia sempre ao abrir
+	var endSec = Math.floor(Date.now() / 1000) + DURATION;
 
 	function pad(n) { return ('0' + n).slice(-2); }
 
@@ -568,9 +550,7 @@ document.querySelectorAll('.accordion-header').forEach(header => {
 		var remaining = endSec - Math.floor(Date.now() / 1000);
 
 		if (remaining <= 0) {
-			// Ao chegar em zero, reinicia com 15 minutos
 			endSec = Math.floor(Date.now() / 1000) + DURATION;
-			localStorage.setItem(KEY, endSec);
 			remaining = DURATION;
 		}
 
@@ -595,7 +575,7 @@ document.querySelectorAll('.accordion-header').forEach(header => {
 .accordion-item.active .accordion-content { display:block; }
 </style>
 
-	<script src="js/busaxxPgFYj8.js" defer=""></script>
+<script src="js/busaxxPgFYj8.js" defer=""></script>
 
 </body>
 </html>
